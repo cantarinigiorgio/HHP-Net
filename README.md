@@ -33,7 +33,7 @@ pip install -r requirements.txt
 
 ## Demo
 
-<img src=imgs/points.png height="300"/> <img src=imgs/axis.png height="300"/> 
+<img src=imgs/points.png height="250"/> <img src=imgs/axis.png height="250"/> 
 
 Download Centernet model from http://download.tensorflow.org/models/object_detection/tf2/20200711/centernet_hg104_512x512_kpts_coco17_tpu-32.tar.gz
 

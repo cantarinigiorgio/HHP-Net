@@ -2,6 +2,7 @@ import argparse
 import tensorflow as tf
 import cv2
 import os
+import time
 from utils import resize_preserving_ar, detect, percentage_to_pixel, get_interest_points, normalize_wrt_maximum_distance_point
 from img_utils import draw_key_points_pose, draw_axis
 import numpy as np
@@ -19,8 +20,9 @@ if __name__ == "__main__":
     input_shape_od_model = (512, 512)
     min_score_thresh, max_boxes_to_draw = .47, 50
     length_axis = 50
+    prev_frame_time, new_frame_time = 0, 0
 
-    gaze_model = tf.keras.models.load_model(config.hpe_model, custom_objects={"tf": tf})
+    hhp_model = tf.keras.models.load_model(config.hpe_model, custom_objects={"tf": tf})
 
     vid = cv2.VideoCapture(0)
 
@@ -29,6 +31,8 @@ if __name__ == "__main__":
         ret, img = vid.read()
 
         img_resized, new_old_shape = resize_preserving_ar(img, input_shape_od_model)
+
+        new_frame_time = time.time()
         detections, _ = detect(model_detection, img_resized, min_score_thresh, new_old_shape)
 
         det, kpt = percentage_to_pixel(img.shape, detections['detection_boxes'], detections['detection_scores'],
@@ -49,7 +53,7 @@ if __name__ == "__main__":
 
             input_kpts = tf.cast(np.expand_dims(face_kpt_normalized, 0), tf.float32)
 
-            y, p, r = gaze_model(input_kpts, training=False)
+            y, p, r = hhp_model(input_kpts, training=False)
 
             yaw, yaw_unc = y[:, 0].numpy()[0], y[:, 1].numpy()[0]
             pitch, pitch_unc = p[:, 0].numpy()[0], p[:, 1].numpy()[0]
@@ -57,11 +61,13 @@ if __name__ == "__main__":
 
             img_res = draw_axis(yaw, pitch, roll, img_res, mean_x, mean_y, length_axis, yaw_unc, pitch_unc, roll_unc)
 
+        # print("nft pft: ", new_frame_time - prev_frame_time)
+        fps = 1. / (new_frame_time - prev_frame_time)
+        prev_frame_time = new_frame_time
+
+        print("FPS: ", fps)
         cv2.imshow("", img_res)
         # cv2.waitKey(0)
-
-        # Display the resulting frame
-        # cv2.imshow('frame', frame)
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break

@@ -22,7 +22,7 @@ Any questions or discussions are welcomed!
 
 To download the repository:
 ```bash
-git clone https://github.com/..
+git clone https://github.com/Malga-Vision/HHP-Net.git
 ```
 
 To install the requirements:
@@ -30,22 +30,33 @@ To install the requirements:
 pip install -r requirements.txt
 ```
 
+## Network architecture
+<img src=imgs/network_architecture.png height="250"/>  
 
 ## Demo
 
 <img src=imgs/points.png height="250"/> <img src=imgs/axis.png height="250"/> 
 
-Download Centernet model from http://download.tensorflow.org/models/object_detection/tf2/20200711/centernet_hg104_512x512_kpts_coco17_tpu-32.tar.gz
 
-extract it in `HHP-Net/centernet/` with:
+There are different choices for the Keypoints detector, in this repository we test CenterNet HourGlass104 Keypoints 512x512, CenterNet Resnet50 V2 Keypoints 512x512 and CenterNet Resnet50 V1 FPN Keypoints 512x512 from the TensorFlow 2 Detection Model Zoo (https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md).
+
+Download one of the previous model (e.g. http://download.tensorflow.org/models/object_detection/tf2/20200711/centernet_hg104_512x512_kpts_coco17_tpu-32.tar.gz)
+
+then extract it in `HHP-Net/centernet/` with:
 ```bash
-tar -zxvf centernet_hg104_512x512_kpts_coco17_tpu-32.tar.gz -C path_to/HHP-Net/centernet1
+tar -zxvf centernet_hg104_512x512_kpts_coco17_tpu-32.tar.gz -C path_to/HHP-Net/centernet
 ```
 
 To make inference on a single image, run
 
 ````
 python inference_on_image.py [--model-detection PATH_MODEL_DETECTION] [--image PATH_IMAGE] [--hpe-model PATH_HPPNET] 
+````
+
+To make inference on the images coming from the webcam, run
+
+````
+python inference_on_webcam.py [--model-detection PATH_MODEL_DETECTION] [--hpe-model PATH_HPPNET] 
 ````
 
 

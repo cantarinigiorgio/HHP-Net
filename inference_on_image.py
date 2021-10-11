@@ -21,7 +21,7 @@ if __name__ == "__main__":
     min_score_thresh, max_boxes_to_draw = .47, 50
     length_axis = 50
 
-    gaze_model = tf.keras.models.load_model(config.hpe_model, custom_objects={"tf": tf})
+    hhp_model = tf.keras.models.load_model(config.hpe_model, custom_objects={"tf": tf})
 
     img = cv2.imread(config.image)
 
@@ -35,6 +35,7 @@ if __name__ == "__main__":
 
     i = 0
     for kpt_person in kpt:
+
         img_res = draw_key_points_pose(img_res, kpt_person)
 
         face_kpt = get_interest_points(kpt_person, 'centernet')
@@ -46,7 +47,7 @@ if __name__ == "__main__":
 
         input_kpts = tf.cast(np.expand_dims(face_kpt_normalized, 0), tf.float32)
 
-        y, p, r = gaze_model(input_kpts, training=False)
+        y, p, r = hhp_model(input_kpts, training=False)
 
         yaw, yaw_unc = y[:, 0].numpy()[0], y[:, 1].numpy()[0]
         pitch, pitch_unc = p[:, 0].numpy()[0], p[:, 1].numpy()[0]

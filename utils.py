@@ -221,17 +221,23 @@ def rescale_key_points(key_points, pad, im_width, im_height):
     right_padding = pad[0]
     bottom_padding = pad[1]
 
+    # print("Rescale kpts", right_padding, bottom_padding, im_width, im_height)
+    # print(key_points)
+
     if bottom_padding != 0:
         for aux in key_points:
             for point in aux:  # x 1 y 0
                 y = point[0] * im_height
-                point[0] = y / (im_height - pad[1])
+                point[0] = y / (im_height - (pad[1]))
+                # x = point[1] * im_width
+                # point[1] = int(x / (im_width - pad[0]))
 
     if right_padding != 0:
         for aux in key_points:
             for point in aux:
                 x = point[1] * im_width
-                point[1] = x / (im_width - pad[0])
+                point[1] = int(x / (im_width - pad[0]))
+    # print(key_points)
 
 
 def percentage_to_pixel(shape, bb_boxes, bb_boxes_scores, key_points=None, key_points_score=None):

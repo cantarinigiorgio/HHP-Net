@@ -10,9 +10,6 @@ def hhp_net(mean, std, alpha):
             this value is used to normalize the confidence values
         :std (float): Standard deviation value of the confidences in the training set;
             this value is used to normalize the confidence values
-        :experiment (int): Number of experiment in order to choose the final layer of the architecture
-            (default is -1)
-
     Returns:
         :model_exp (tf.keras.models.Model): the model built accordingly to the experiment number
     """

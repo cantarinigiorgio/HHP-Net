@@ -16,7 +16,7 @@ color_pose = {
 }
 
 
-def draw_key_points_pose(image, kpt, dim=5):
+def draw_key_points_pose(image, kpt, radius=3, dim=5):
     """
     Draw the key points and the lines connecting the body points
 
@@ -35,21 +35,22 @@ def draw_key_points_pose(image, kpt, dim=5):
 
     for j in range(len(kpt)):
         color = color_pose["blue"]
+
         if j == face_points[0]:  # nose
             color = color_pose["purple"]
-            cv2.circle(image, (int(kpt[j][1]), int(kpt[j][0])), 3, color, dim)
+            cv2.circle(image, (int(kpt[j][1]), int(kpt[j][0])), radius, color, dim)
         elif j == face_points[1]:  # left eye
             color = color_pose["light_pink"]
-            cv2.circle(image, (int(kpt[j][1]), int(kpt[j][0])), 3, color, dim)
+            cv2.circle(image, (int(kpt[j][1]), int(kpt[j][0])), radius, color, dim)
         elif j == face_points[2]:  # right eye
             color = color_pose["dark_pink"]
-            cv2.circle(image, (int(kpt[j][1]), int(kpt[j][0])), 3, color, dim)
+            cv2.circle(image, (int(kpt[j][1]), int(kpt[j][0])), radius, color, dim)
         elif j == face_points[3]:  # left ear
             color = color_pose["light_orange"]
-            cv2.circle(image, (int(kpt[j][1]), int(kpt[j][0])), 3, color, dim)
+            cv2.circle(image, (int(kpt[j][1]), int(kpt[j][0])), radius, color, dim)
         elif j == face_points[4]:  # right eye
             color = color_pose["dark_orange"]
-            cv2.circle(image, (int(kpt[j][1]), int(kpt[j][0])), 3, color, dim)
+            cv2.circle(image, (int(kpt[j][1]), int(kpt[j][0])), radius, color, dim)
 
     alpha = 0.2
     image = cv2.addWeighted(overlay, alpha, image, 1 - alpha, 0)

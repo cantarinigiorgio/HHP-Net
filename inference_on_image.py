@@ -10,9 +10,9 @@ import numpy as np
 if __name__ == "__main__":
 
     ap = argparse.ArgumentParser()
-    ap.add_argument("-md", "--model-detection", type=str, default=None, help="path to the detection model", required=True)
-    ap.add_argument("-hm", "--hpe-model", type=str, default=None, help="path to the hpe model", required=True)
-    ap.add_argument("-i", "--image", type=str, default=None, help="path to the img", required=True)
+    ap.add_argument("-md", "--model-detection", type=str, default=None, help="PATH_MODEL_DETECTION", required=True)
+    ap.add_argument("-hm", "--hpe-model", type=str, default=None, help="PATH_HPPNET", required=True)
+    ap.add_argument("-i", "--image", type=str, default=None, help="PATH_IMAGE", required=True)
     config = ap.parse_args()
 
     tf.keras.backend.clear_session()

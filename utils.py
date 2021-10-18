@@ -221,24 +221,24 @@ def rescale_key_points(key_points, pad, im_width, im_height):
     right_padding = pad[0]
     bottom_padding = pad[1]
 
-    # print("Rescale kpts", right_padding, bottom_padding, im_width, im_height)
-    # print(key_points)
+    print("Rescale kpts", right_padding, bottom_padding, pad, im_width, im_height)
+    print(key_points)
     # exit()
 
     if bottom_padding != 0:
         for aux in key_points:
             for point in aux:  # x 1 y 0
-                y = point[1] * im_height
-                point[1] = y / (im_height)
+                y = point[0] * im_height
+                point[0] = y / (im_height)
                 # x = point[1] * im_width
                 # point[1] = int(x / (im_width - pad[0]))
 
     if right_padding != 0:
         for aux in key_points:
             for point in aux:
-                x = point[0] * im_width
-                point[0] = int(x / im_width)
-    # print(key_points)
+                x = point[1] * im_width
+                point[1] = int(x / im_width)
+    print(key_points)
     return key_points
 
 
@@ -264,6 +264,7 @@ def percentage_to_pixel(shape, bb_boxes, bb_boxes_scores, key_points=None, key_p
     """
 
     im_height, im_width = shape[0], shape[1]
+    print("BBB", shape, key_points)
     det, kpt = [], []
 
     if key_points is not None:
@@ -278,7 +279,7 @@ def percentage_to_pixel(shape, bb_boxes, bb_boxes_scores, key_points=None, key_p
         if key_points is not None:
             aux_list = []
             for n, key_point in enumerate(key_points[i]):
-                aux = [int(key_point[0] * im_height), int(key_point[1] * im_width), key_points_score[i][n]]
+                aux = [int(key_point[0] * im_width), int(key_point[1] * im_height), key_points_score[i][n]]
                 aux_list.append(aux)
             kpt.append(aux_list)
 

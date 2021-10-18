@@ -32,6 +32,7 @@ def draw_key_points_pose(image, kpt, radius=3, dim=5):
     """
 
     overlay = image.copy()
+    print("AAA", kpt)
 
     for j in range(len(kpt)):
         color = color_pose["blue"]

@@ -22,7 +22,7 @@ Any questions or discussions are welcomed!
 
 To download the repository:
 ```bash
-git clone https://github.com/Malga-Vision/HHP-Net.git
+git clone https://github.com/cantarinigiorgio/HHP-Net
 ```
 
 To install the requirements:

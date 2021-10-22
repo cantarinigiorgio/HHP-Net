@@ -38,7 +38,12 @@ pip install -r requirements.txt
 <img src=imgs/points.png height="250"/> <img src=imgs/axis.png height="250"/> 
 
 
-There are different choices for the Keypoints detector, in this repository we test CenterNet HourGlass104 Keypoints 512x512, CenterNet Resnet50 V2 Keypoints 512x512 and CenterNet Resnet50 V1 FPN Keypoints 512x512 from the TensorFlow 2 Detection Model Zoo (https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md).
+There are different choices for the Keypoints detector and in this repository we propose two variants: a normal version, very precise and a faster
+one less accurate but more efficient.
+
+### Normal version
+We test three different backbones of CenterNet (HourGlass104, Resnet50V2 and Resnet50V1 FPN available at https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md) that takes 
+as input 512x512 images.
 
 Download one of the previous model (e.g. http://download.tensorflow.org/models/object_detection/tf2/20200711/centernet_hg104_512x512_kpts_coco17_tpu-32.tar.gz)
 
@@ -59,22 +64,22 @@ To make inference on the images coming from the webcam, run
 python inference_on_webcam.py [--model-detection PATH_MODEL_DETECTION] [--hpe-model PATH_HPPNET] 
 ````
 
+### Faster version
+
 
 ## Citation
 
 If you find this code useful for your research, please use the following BibTeX entry.
 
 ```
-@{,
-  title={},
-  author={},
-  journal={},
-  year={}
+@{
+  title={HHP-Net: A light Heteroscedastic neural network for Head Pose estimation with uncertainty},
+  author={Giorgio Cantarini, Francesca Odone, Nicoletta Noceti},
+  journal={IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
+  year={2022}
 }
 
 ```
 
 ## Code Author
 - Giorgio Cantarini - Imavis s.r.l. and Malga (Machine Learning Genoa Center)
-
-## License

@@ -123,7 +123,12 @@ def filter_detections(detections, min_score_thresh, shape, new_old_shape=None):
         rescale_bb(rescaled_boxes, new_old_shape, im_width, im_height)
         if center_net:
             rescaled_key_points = key_points[:i]
-            rescale_key_points(rescaled_key_points, new_old_shape, im_width, im_height)
+            rescaled_key_points = np.flip(rescaled_key_points, 2)
+            print(rescaled_key_points.shape, type(rescaled_key_points))
+            # rescaled_key_points = np.concatenate(rescaled_key_points[:, :, 2:], rescaled_key_points[:, :, :2])
+            # print(rescaled_key_points.shape, type(rescaled_key_points))
+            # exit()
+            # rescale_key_points(rescaled_key_points, new_old_shape, im_width, im_height)
 
     filtered_detections['detection_boxes'] = rescaled_boxes
     filtered_detections['detection_scores'] = scores[:i]
@@ -228,16 +233,16 @@ def rescale_key_points(key_points, pad, im_width, im_height):
     if bottom_padding != 0:
         for aux in key_points:
             for point in aux:  # x 1 y 0
-                y = point[0] * im_height
-                point[0] = y / (im_height)
+                y = point[1] * im_height
+                point[1] = y / (im_height)
                 # x = point[1] * im_width
                 # point[1] = int(x / (im_width - pad[0]))
 
     if right_padding != 0:
         for aux in key_points:
             for point in aux:
-                x = point[1] * im_width
-                point[1] = int(x / im_width)
+                x = point[x] * im_width
+                point[x] = int(x / im_width)
     print(key_points)
     return key_points
 
@@ -278,6 +283,15 @@ def percentage_to_pixel(shape, bb_boxes, bb_boxes_scores, key_points=None, key_p
 
         if key_points is not None:
             aux_list = []
+
+            # ratio_h, ratio_w = img_person.shape[0] / (img_person_resized.shape[1] - padding[1]), (img_person.shape[1]) / (
+            #             img_person_resized.shape[2] - padding[0])  # shape 0 batch 1
+            #
+            # for elem in aux_key_points_array:
+            #     x = int((elem[1]) * ratio_h)
+            #     y = int(elem[0] * ratio_w)
+            #     c = float(elem[2])
+            #     aux_key_points_array_ratio.append([x, y, c])
             for n, key_point in enumerate(key_points[i]):
                 aux = [int(key_point[0] * im_width), int(key_point[1] * im_height), key_points_score[i][n]]
                 aux_list.append(aux)
@@ -310,8 +324,8 @@ def get_interest_points(kpts, detector=''):
     res_kpts = []
 
     for index in face_points:
-        res_kpts.append(kpts[index][1])
         res_kpts.append(kpts[index][0])
+        res_kpts.append(kpts[index][1])
         res_kpts.append(kpts[index][2])
 
     return res_kpts

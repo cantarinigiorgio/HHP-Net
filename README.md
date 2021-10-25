@@ -38,17 +38,15 @@ pip install -r requirements.txt
 <img src=imgs/points.png height="250"/> <img src=imgs/axis.png height="250"/> 
 
 
-There are different choices for the Keypoints detector: in this repository we propose two variants: 
-- a normal version, very precise 
-- a faster version less accurate but more efficient
+There are different choices for the key points detector: in this repository we propose two variants
+- a normal version, very precise but less efficient
+- a faster version less accurate but faster
 
 ### Normal version
-We test three different backbones of CenterNet (HourGlass104, Resnet50V2 and Resnet50V1 FPN available at https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md); 
+We test three different backbones of CenterNet (HourGlass104, Resnet50V2 and Resnet50V1 available in the [TensorFlow 2 Detection Model Zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md)); 
 each model takes as input 512x512 images.
 
-Download one of the previous model (e.g. http://download.tensorflow.org/models/object_detection/tf2/20200711/centernet_hg104_512x512_kpts_coco17_tpu-32.tar.gz)
-
-then extract it to `HHP-Net/centernet/` with:
+Download one of the previous model (e.g. [HourGlass104](http://download.tensorflow.org/models/object_detection/tf2/20200711/centernet_hg104_512x512_kpts_coco17_tpu-32.tar.gz)) then extract it to `HHP-Net/centernet/` with:
 ```bash
 tar -zxvf centernet_hg104_512x512_kpts_coco17_tpu-32.tar.gz -C /HHP-Net/centernet
 ```
@@ -67,16 +65,16 @@ python inference_on_webcam.py [--detection-model PATH_DETECTION_MODEL] [--hhp-mo
 
 ### Faster version
 
-To estimate the keypoints firstly we use a model for detecting people then a model for estimating the pose (from each bounding box containing a person)
+To estimate the keypoints firstly we use an object detection model for detecting people; then we exploit a model to estimate the pose of each people detected by the previous model in the image.
 
-In order to detect people we test Centernet_Mobilenetv2_fpn_od (to download it http://download.tensorflow.org/models/object_detection/tf2/20210210/centernet_mobilenetv2fpn_512x512_coco17_od.tar.gz)
-then extract it in `HHP-Net/centernet/` with:
+In order to detect people we test [Centernet MobilenetV2](http://download.tensorflow.org/models/object_detection/tf2/20210210/centernet_mobilenetv2fpn_512x512_coco17_od.tar.gz): 
+download it and then extract it to `HHP-Net/centernet/`:
 
 ```bash
 tar -zxvf centernet_mobilenetv2fpn_512x512_coco17_od.tar.gz -C /HHP-Net/centernet
 ```
 
-Then download the model for pose estimation from (https://storage.googleapis.com/download.tensorflow.org/models/tflite/posenet_mobilenet_v1_100_257x257_multi_kpt_stripped.tflite) and move to 
+Then download [Posenet](https://storage.googleapis.com/download.tensorflow.org/models/tflite/posenet_mobilenet_v1_100_257x257_multi_kpt_stripped.tflite) for pose estimation and move to `HHP-Net/posenet/`
 ```bash
 mv posenet_mobilenet_v1_100_257x257_multi_kpt_stripped.tflite HHP-Net/posenet/
 ```

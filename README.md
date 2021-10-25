@@ -38,33 +38,60 @@ pip install -r requirements.txt
 <img src=imgs/points.png height="250"/> <img src=imgs/axis.png height="250"/> 
 
 
-There are different choices for the Keypoints detector and in this repository we propose two variants: a normal version, very precise and a faster
-one less accurate but more efficient.
+There are different choices for the Keypoints detector: in this repository we propose two variants: 
+- a normal version, very precise 
+- a faster version less accurate but more efficient
 
 ### Normal version
-We test three different backbones of CenterNet (HourGlass104, Resnet50V2 and Resnet50V1 FPN available at https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md) that takes 
-as input 512x512 images.
+We test three different backbones of CenterNet (HourGlass104, Resnet50V2 and Resnet50V1 FPN available at https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md); 
+each model takes as input 512x512 images.
 
 Download one of the previous model (e.g. http://download.tensorflow.org/models/object_detection/tf2/20200711/centernet_hg104_512x512_kpts_coco17_tpu-32.tar.gz)
 
-then extract it in `HHP-Net/centernet/` with:
+then extract it to `HHP-Net/centernet/` with:
 ```bash
-tar -zxvf centernet_hg104_512x512_kpts_coco17_tpu-32.tar.gz -C path_to/HHP-Net/centernet
+tar -zxvf centernet_hg104_512x512_kpts_coco17_tpu-32.tar.gz -C /HHP-Net/centernet
 ```
 
-To make inference on a single image, run
+To make inference on a single image, run:
 
 ````
-python inference_on_image.py [--model-detection PATH_MODEL_DETECTION] [--image PATH_IMAGE] [--hpe-model PATH_HPPNET] 
+python inference_on_image.py [--detection-model PATH_DETECTION_MODEL] [--hhp-model PATH_HHPNET] [--image PATH_IMAGE]  
 ````
 
-To make inference on the images coming from the webcam, run
+To make inference on frames from the webcam, run:
 
 ````
-python inference_on_webcam.py [--model-detection PATH_MODEL_DETECTION] [--hpe-model PATH_HPPNET] 
+python inference_on_webcam.py [--detection-model PATH_DETECTION_MODEL] [--hhp-model PATH_HHPNET] 
 ````
 
 ### Faster version
+
+To estimate the keypoints firstly we use a model for detecting people then a model for estimating the pose (from each bounding box containing a person)
+
+In order to detect people we test Centernet_Mobilenetv2_fpn_od (to download it http://download.tensorflow.org/models/object_detection/tf2/20210210/centernet_mobilenetv2fpn_512x512_coco17_od.tar.gz)
+then extract it in `HHP-Net/centernet/` with:
+
+```bash
+tar -zxvf centernet_mobilenetv2fpn_512x512_coco17_od.tar.gz -C /HHP-Net/centernet
+```
+
+Then download the model for pose estimation from (https://storage.googleapis.com/download.tensorflow.org/models/tflite/posenet_mobilenet_v1_100_257x257_multi_kpt_stripped.tflite) and move to 
+```bash
+mv posenet_mobilenet_v1_100_257x257_multi_kpt_stripped.tflite HHP-Net/posenet/
+```
+
+To make inference on a single image, run:
+
+````
+python fast_inference_on_image.py [--detection-model PATH_MODEL_DETECTION] [--pose-model PATH_MODEL_POSE] [--hhp-model PATH_HHPNET] [--image PATH_IMAGE] 
+````
+
+To make inference on frames from the webcam, run:
+
+````
+python fast_inference_on_webcam.py [--detection-model PATH_MODEL_DETECTION] [--pose-model PATH_MODEL_POSE] [--hhp-model PATH_HHPNET] 
+````
 
 
 ## Citation

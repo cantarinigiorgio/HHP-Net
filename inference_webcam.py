@@ -35,7 +35,7 @@ if __name__ == "__main__":
         new_frame_time = time.time()
         detections, _ = detect(model_detection, img_resized, min_score_thresh, new_old_shape)
 
-        det, kpt = percentage_to_pixel(img.shape, detections['detection_keypoints'], detections['detection_keypoint_scores'])
+        kpt = percentage_to_pixel(img.shape, detections['detection_keypoints'], detections['detection_keypoint_scores'])
 
         img_res = img.copy()
 
@@ -48,7 +48,7 @@ if __name__ == "__main__":
             mean_x = np.mean([face_kpt[i] for i in range(0, 15, 3) if face_kpt[i] != 0.0])
             mean_y = np.mean([face_kpt[i + 1] for i in range(0, 15, 3) if face_kpt[i + 1] != 0.0])
 
-            face_kpt_normalized = np.array(normalize_wrt_maximum_distance_point(face_kpt))
+            face_kpt_normalized = np.array(normalize_wrt_maximum_distance_point(face_kpt, mean_x, mean_y))
 
             input_kpts = tf.cast(np.expand_dims(face_kpt_normalized, 0), tf.float32)
 

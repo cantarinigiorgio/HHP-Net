@@ -10,7 +10,7 @@ of memory occupancy --  with comparable accuracy.
 Our method also provides a measure of the heteroscedastic uncertainties associated with the three angles, through an appropriately designed 
 loss function. As an example application, we address social interaction analysis in images: we propose an algorithm for a 
 quantitative estimation of the level of interaction between people, starting from their head poses and reasoning on their mutual positions.
-[**ArXiv**](https://arxiv.org/)  
+[**ArXiv**](https://arxiv.org/abs/2111.01440)  
 
 
 Any questions or discussions are welcomed!
@@ -96,7 +96,16 @@ python fast_inference_on_webcam.py [--detection-model PATH_MODEL_DETECTION] [--p
 
 If you find this code useful for your research, please use the following BibTeX entry.
 
-``` ```
+``` 
+@misc{cantarini2021hhpnet,
+      title={HHP-Net: A light Heteroscedastic neural network for Head Pose estimation with uncertainty}, 
+      author={Giorgio Cantarini and Federico Figari Tomenotti and Nicoletta Noceti and Francesca Odone},
+      year={2021},
+      eprint={2111.01440},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+```
 <!--
 @{
   title={HHP-Net: A light Heteroscedastic neural network for Head Pose estimation with uncertainty},

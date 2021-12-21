@@ -11,7 +11,7 @@ This repository contains the cource code for the paper [**HHP-Net: A light Heter
 Any questions or discussions are welcomed!
 
 <p align="center">
-    <img src=imgs/pipeline.png height="280"/>  
+    <img src=imgs/pipeline.png />  
 </p>
 
 ## Abstract

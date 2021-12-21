@@ -48,7 +48,7 @@ if __name__ == "__main__":
             elem[0] = elem[0] * img.shape[0]
             elem[1] = elem[1] * img.shape[1]
 
-        img_res = draw_key_points_pose(img_res, kpt_person)
+        # img_res = draw_key_points_pose(img_res, kpt_person)
 
         face_kpt = get_face_points(kpt_person, 'centernet')
 
@@ -67,7 +67,9 @@ if __name__ == "__main__":
 
         img_res = draw_axis(yaw, pitch, roll, img_res, mean_x, mean_y, length_axis, yaw_unc, pitch_unc, roll_unc)
 
-    cv2.imshow("", img_res)
-    cv2.waitKey(0)
+    cv2.imwrite('/home/imavis/Desktop/ttttemp/fast_1_pose.png', cv2.resize(img_res, (720, 440)))
+
+    # cv2.imshow("", img_res)
+    # cv2.waitKey(0)
 
 

@@ -1,26 +1,28 @@
-HHP-Net: A light Heteroscedastic neural network for Head Pose estimation with uncertainty
-===
+# HHP-Net: A light Heteroscedastic neural network for Head Pose estimation with uncertainty
 
-**Giorgio Cantarini, Francesca Odone, Nicoletta Noceti, Federico Tomenotti - WACV 2022**
+![supported versions](https://img.shields.io/badge/python-3.x-brightgreen/?style=flat&logo=python&color=green)
+![Library](https://img.shields.io/badge/library-Tensorflow-blue?logo=Tensorflow)
+![GitHub license](https://img.shields.io/cocoapods/l/AFNetworking)
 
-**Abstract:** In this paper we introduce a novel method to estimate the head pose of people in single images starting from a small set of
+This repository contains the cource code for the paper [**HHP-Net: A light Heteroscedastic neural network for Head Pose estimation with uncertainty [WACV22]**](https://arxiv.org/abs/2111.01440).
+
+**Code Author: Giorgio Cantarini**
+
+Any questions or discussions are welcomed!
+
+
+## Abstract
+In this paper we introduce a novel method to estimate the head pose of people in single images starting from a small set of
 head keypoints. To this purpose, we propose a regression model that exploits keypoints and outputs the head pose represented by yaw, pitch, 
 and roll. Our model is simple to implement and more efficient with respect to the state of the art -- faster in inference and smaller in terms 
 of memory occupancy --  with comparable accuracy.
 Our method also provides a measure of the heteroscedastic uncertainties associated with the three angles, through an appropriately designed 
 loss function. As an example application, we address social interaction analysis in images: we propose an algorithm for a 
 quantitative estimation of the level of interaction between people, starting from their head poses and reasoning on their mutual positions.
-[**ArXiv**](https://arxiv.org/abs/2111.01440)  
-
-
-Any questions or discussions are welcomed!
-
-
-
 
 ## Installation
 
-To download the repository:
+To clone the repository:
 ```bash
 git clone https://github.com/cantarinigiorgio/HHP-Net
 ```
@@ -34,13 +36,12 @@ pip install -r requirements.txt
 <img src=imgs/network_architecture.png height="250"/>  
 
 ## Demo
-
 <img src=imgs/points.png height="250"/> <img src=imgs/axis.png height="250"/> 
 
 
 There are different choices for the key points detector: in this repository we propose two variants
-- a normal version, very precise but less efficient
-- a faster version less accurate but faster
+- a `normal` version: accurate but less efficient
+- a `faster` version: less accurate but faster
 
 ### Normal version
 We test three different backbones of CenterNet (HourGlass104, Resnet50V2 and Resnet50V1 available in the [TensorFlow 2 Detection Model Zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md)); 
@@ -57,11 +58,15 @@ To make inference on a single image, run:
 python inference_on_image.py [--detection-model PATH_DETECTION_MODEL] [--hhp-model PATH_HHPNET] [--image PATH_IMAGE]  
 ````
 
+<img src=imgs/1_points.png height="250"/>  
+<img src=imgs/1_pose.png height="250"/>  
+
 To make inference on frames from the webcam, run:
 
 ````
 python inference_on_webcam.py [--detection-model PATH_DETECTION_MODEL] [--hhp-model PATH_HHPNET] 
 ````
+
 
 ### Faster version
 
@@ -84,12 +89,22 @@ To make inference on a single image, run:
 ````
 python fast_inference_on_image.py [--detection-model PATH_MODEL_DETECTION] [--pose-model PATH_MODEL_POSE] [--hhp-model PATH_HHPNET] [--image PATH_IMAGE] 
 ````
+<img src=imgs/fast_1_points.png height="250"/>  
+<img src=imgs/fast_1_pose.png height="250"/>  
+
 
 To make inference on frames from the webcam, run:
 
 ````
 python fast_inference_on_webcam.py [--detection-model PATH_MODEL_DETECTION] [--pose-model PATH_MODEL_POSE] [--hhp-model PATH_HHPNET] 
 ````
+
+To make inference on frames from a video, run:
+
+````
+python fast_inference_on_webcam.py [--detection-model PATH_MODEL_DETECTION] [--pose-model PATH_MODEL_POSE] [--hhp-model PATH_HHPNET] [--video PATH_VIDEO]
+````
+frames -> frames PUNTI -> frames POSE
 
 
 ## Citation
@@ -106,14 +121,7 @@ If you find this code useful for your research, please use the following BibTeX 
       primaryClass={cs.CV}
 }
 ```
-<!--
-@{
-  title={HHP-Net: A light Heteroscedastic neural network for Head Pose estimation with uncertainty},
-  author={Giorgio Cantarini, Francesca Odone, Nicoletta Noceti},
-  journal={IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
-  year={2022}
-}
--->
 
-## Code Author
-- Giorgio Cantarini - Imavis s.r.l. and Malga (Machine Learning Genoa Center)
+## Licence
+
+MIT

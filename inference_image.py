@@ -37,6 +37,8 @@ if __name__ == "__main__":
 
     img_res = img.copy()
 
+    # cv2.imwrite('/home/imavis/Desktop/ttttemp/1.png', cv2.resize(img_res, (720, 440)))
+
     i = 0
     for kpt_person in kpt:
 

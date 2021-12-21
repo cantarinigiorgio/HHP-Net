@@ -58,8 +58,7 @@ To make inference on a single image, run:
 python inference_on_image.py [--detection-model PATH_DETECTION_MODEL] [--hhp-model PATH_HHPNET] [--image PATH_IMAGE]  
 ````
 
-<img src=imgs/1_points.png height="250"/>  
-<img src=imgs/1_pose.png height="250"/>  
+<img src=imgs/1_points.png height="250"/><img src=imgs/1_pose.png height="250"/>  
 
 To make inference on frames from the webcam, run:
 
@@ -89,8 +88,7 @@ To make inference on a single image, run:
 ````
 python fast_inference_on_image.py [--detection-model PATH_MODEL_DETECTION] [--pose-model PATH_MODEL_POSE] [--hhp-model PATH_HHPNET] [--image PATH_IMAGE] 
 ````
-<img src=imgs/fast_1_points.png height="250"/>  
-<img src=imgs/fast_1_pose.png height="250"/>  
+<img src=imgs/fast_1_points.png height="250"/><img src=imgs/fast_1_pose.png height="250"/>  
 
 
 To make inference on frames from the webcam, run:

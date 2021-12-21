@@ -33,11 +33,15 @@ pip install -r requirements.txt
 ```
 
 ## Network architecture
-<img src=imgs/network_architecture.png height="250"/>  
+
+<p align="center">
+    <img src=imgs/network_architecture.png height="250"/>  
+</p>
 
 ## Demo
-<img src=imgs/points.png height="250"/> <img src=imgs/axis.png height="250"/> 
-
+<p align="center">
+    <img src=imgs/points.png height="250"/> <img src=imgs/axis.png height="250"/>
+</p>
 
 There are different choices for the key points detector: in this repository we propose two variants
 - a `normal` version: accurate but less efficient
@@ -57,8 +61,9 @@ To make inference on a single image, run:
 ````
 python inference_on_image.py [--detection-model PATH_DETECTION_MODEL] [--hhp-model PATH_HHPNET] [--image PATH_IMAGE]  
 ````
-
-<img src=imgs/1_points.png height="250"/><img src=imgs/1_pose.png height="250"/>  
+<p align="center">
+    <img src=imgs/1_points.png height="250"/><img src=imgs/1_pose.png height="250"/>  
+</p>
 
 To make inference on frames from the webcam, run:
 
@@ -88,8 +93,9 @@ To make inference on a single image, run:
 ````
 python fast_inference_on_image.py [--detection-model PATH_MODEL_DETECTION] [--pose-model PATH_MODEL_POSE] [--hhp-model PATH_HHPNET] [--image PATH_IMAGE] 
 ````
-<img src=imgs/fast_1_points.png height="250"/><img src=imgs/fast_1_pose.png height="250"/>  
-
+<p align="center">
+    <img src=imgs/fast_1_points.png height="250"/><img src=imgs/fast_1_pose.png height="250"/>  
+</p>
 
 To make inference on frames from the webcam, run:
 
@@ -102,7 +108,6 @@ To make inference on frames from a video, run:
 ````
 python fast_inference_on_webcam.py [--detection-model PATH_MODEL_DETECTION] [--pose-model PATH_MODEL_POSE] [--hhp-model PATH_HHPNET] [--video PATH_VIDEO]
 ````
-frames -> frames PUNTI -> frames POSE
 
 
 ## Citation

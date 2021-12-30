@@ -25,19 +25,13 @@ if __name__ == "__main__":
 
     img = cv2.imread(config.image)
 
-    # cv2.imshow("", img)
-    # cv2.waitKey(0)
-
     img_resized, new_old_shape = resize_preserving_ar(img, input_shape_od_model)
-    # cv2.imshow("", img_resized)
-    # cv2.waitKey(0)
+
     detections, _ = detect(model_detection, img_resized, min_score_thresh, new_old_shape)
 
     kpt = percentage_to_pixel(img.shape, detections['detection_keypoints'], detections['detection_keypoint_scores'])
 
     img_res = img.copy()
-
-    # cv2.imwrite('/home/imavis/Desktop/ttttemp/1.png', cv2.resize(img_res, (720, 440)))
 
     i = 0
     for kpt_person in kpt:

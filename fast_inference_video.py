@@ -29,27 +29,15 @@ if __name__ == "__main__":
     if cap.isOpened() == False:
         print("Error opening video stream or file")
 
-    # Read until video is completed
     while cap.isOpened():
-        # Capture frame-by-frame
         ret, img = cap.read()
         if ret:
             resized_img, new_old_shape = resize_preserving_ar(img, input_shape_model_od)
-            # print("2", img.shape, new_old_shape)
-            # cv2.imshow("", img)
-            # cv2.waitKey(0)
 
             boxes, classes, scores, num_det = inference_interpreter(interpreter_od, resized_img, input_details_od)
-            # print(boxes, classes, scores, num_det)
-            # draw_aux(img, boxes)
-            # exit()
-
             kpt = pose_from_det(resized_img, boxes, classes, scores, interpreter_pose, input_shape_interpreter_pose, input_details_pose, img, new_old_shape, False, 0.3)
 
-            # print("XX", kpt)
             img_res = img.copy()
-
-            # print("BBB", aux_img.shape)
 
             for kpt_person in kpt:
                 for elem in kpt_person:

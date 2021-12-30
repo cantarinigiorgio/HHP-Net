@@ -21,27 +21,18 @@ if __name__ == "__main__":
     length_axis = 50
 
     img = cv2.imread(config.image)
-    # print("1", aux_img.shape)
 
     interpreter_od, input_shape_model_od, input_details_od = initialize_interpreter(config.detection_model)
     interpreter_pose, input_shape_interpreter_pose, input_details_pose = initialize_interpreter(config.pose_model)
 
     resized_img, new_old_shape = resize_preserving_ar(img, input_shape_model_od)
-    # print("2", img.shape, new_old_shape)
-    # cv2.imshow("", img)
-    # cv2.waitKey(0)
 
     boxes, classes, scores, num_det = inference_interpreter(interpreter_od, resized_img, input_details_od)
-    # print(boxes, classes, scores, num_det)
-    # draw_aux(img, boxes)
-    # exit()
 
     kpt = pose_from_det(resized_img, boxes, classes, scores, interpreter_pose, input_shape_interpreter_pose, input_details_pose, img, new_old_shape, False, 0.3)
 
-    # print("XX", kpt)
     img_res = img.copy()
 
-    # print("BBB", aux_img.shape)
 
     for kpt_person in kpt:
         for elem in kpt_person:
@@ -67,9 +58,7 @@ if __name__ == "__main__":
 
         img_res = draw_axis(yaw, pitch, roll, img_res, mean_x, mean_y, length_axis, yaw_unc, pitch_unc, roll_unc)
 
-    cv2.imwrite('/home/imavis/Desktop/ttttemp/fast_1_pose.png', cv2.resize(img_res, (720, 440)))
-
-    # cv2.imshow("", img_res)
-    # cv2.waitKey(0)
+    cv2.imshow("", img_res)
+    cv2.waitKey(0)
 
 

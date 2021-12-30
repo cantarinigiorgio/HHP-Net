@@ -60,7 +60,6 @@ if __name__ == "__main__":
 
             img_res = draw_axis(yaw, pitch, roll, img_res, mean_x, mean_y, length_axis, yaw_unc, pitch_unc, roll_unc)
 
-        # print("nft pft: ", new_frame_time - prev_frame_time)
         fps = 1. / (new_frame_time - prev_frame_time)
         prev_frame_time = new_frame_time
 

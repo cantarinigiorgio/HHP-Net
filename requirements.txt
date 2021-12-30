@@ -12,8 +12,9 @@ google-pasta==0.2.0
 grpcio==1.41.1
 h5py==3.1.0
 idna==3.2
-keras==2.6.0
+keras==2.7.0
 Keras-Preprocessing==1.1.2
+libclang==12.0.0
 Markdown==3.3.4
 numpy==1.19.4
 oauthlib==3.1.1
@@ -29,8 +30,9 @@ six==1.15.0
 tensorboard==2.6.0
 tensorboard-data-server==0.6.1
 tensorboard-plugin-wit==1.8.0
-tensorflow==2.6.0
+tensorflow==2.7.0
 tensorflow-estimator==2.7.0
+tensorflow-io-gcs-filesystem==0.23.1
 termcolor==1.1.0
 typing-extensions==3.7.4.3
 urllib3==1.26.7
